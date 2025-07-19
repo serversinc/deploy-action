@@ -1,0 +1,31 @@
+name: 'Serversinc Deploy Trigger'
+description: 'Triggers a deployment in Serversinc by sending a CURL request.'
+author: 'Max Diamond (hello@serversinc.io)'
+branding:
+  icon: 'cloud'
+  color: 'orange'
+inputs:
+  hook:
+    description: 'The deployment hook (event) to trigger.'
+    required: true
+  secret:
+    description: 'The deploy secret. Should be set from repository secrets.'
+    required: true
+  tag:
+    description: 'Optional docker image tag to include in the deployment request body.'
+    required: false
+runs:
+  using: 'composite'
+  steps:
+    - name: Trigger Serversinc Deployment
+      run: |
+        URL="https://dash.serversinc.io/v1/events/"
+        HOOK="${{ inputs.hook }}"
+        SECRET="${{ inputs.secret }}"
+        TAG="${{ inputs.tag }}"
+        if [ -n "$TAG" ]; then
+          curl -X POST "$URL$HOOK" -H "X-Deploy-Secret: $SECRET" -H "Content-Type: application/json" -d "{\"tag\": \"$TAG\"}"
+        else
+          curl -X POST "$URL$HOOK" -H "X-Deploy-Secret: $SECRET"
+        fi
+      shell: bash
