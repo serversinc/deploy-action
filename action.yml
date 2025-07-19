@@ -1,9 +1,12 @@
 name: 'Serversinc Deploy Trigger'
-description: 'Triggers a deployment in Serversinc by sending a CURL request.'
+
+description: 'Triggers an Application deployment in Serversinc'
 author: 'Max Diamond (hello@serversinc.io)'
+
 branding:
   icon: 'cloud'
   color: 'orange'
+
 inputs:
   hook:
     description: 'The deployment hook (event) to trigger.'
@@ -14,6 +17,7 @@ inputs:
   tag:
     description: 'Optional docker image tag to include in the deployment request body.'
     required: false
+
 runs:
   using: 'composite'
   steps:

@@ -1,8 +1,8 @@
-# Serversinc Deploy Trigger GitHub Action
+# Deploy Application - GitHub Action
 
 Triggers a deployment in Serversinc by sending a CURL request to the API. Useful for automating deployments in CI/CD pipelines, such as after a successful docker build.
 
-## Usage
+## How to Use
 
 ```yaml
 - name: Trigger Application Deployment
@@ -19,5 +19,4 @@ Triggers a deployment in Serversinc by sending a CURL request to the API. Useful
 - `tag` (optional): Docker Image tag to include in the deployment request body.
 
 ## License
-
-MIT
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
